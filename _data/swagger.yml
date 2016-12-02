@@ -123,9 +123,9 @@ paths:
                 description: Conversation ID
                 type: integer
               lastVoteTimestamp:
-                type: string
-                format: date-time
-                description: Timestamp of last vote in conversation.
+                type: integer
+                format: int64
+                description: Timestamp of last vote in conversation. Milliseconds since Unix epoch.
               ptptstats:
                 $ref: '#/definitions/PTPTStatsVectors'
 definitions:
@@ -206,8 +206,9 @@ definitions:
         type: string
         description: ''
       created:
-        type: string
-        format: date-time
+        type: integer
+        format: int64
+        description: Milliseconds since Unix epoch.
       strict_moderation:
         type: boolean
       profanity_filter:
@@ -215,8 +216,9 @@ definitions:
       spam_filter:
         type: boolean
       modified:
-        type: string
-        format: date-time
+        type: integer
+        format: int64
+        description: Milliseconds since Unix epoch.
       conversation_id:
         type: string
       is_owner:
@@ -227,14 +229,17 @@ definitions:
     type: object
     properties:
       created:
-        type: string
-        format: date-time
+        type: integer
+        format: int64
+        description: Milliseconds since Unix epoch.
       last_interaction:
-        type: string
-        format: date-time
+        type: integer
+        format: int64
+        description: Milliseconds since Unix epoch.
       last_notified:
-        type: string
-        format: date-time
+        type: integer
+        format: int64
+        description: Milliseconds since Unix epoch.
       mod:
         type: integer
       pid:
