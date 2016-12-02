@@ -65,9 +65,49 @@ paths:
                 type: string
                 description: ''
     get:
+      security:
+       - basicAuth: []
       description: Get all the data for one conversation
       tags:
         - Conversations
+      parameters:
+        - name: conversation_id
+          in: query
+          type: string
+        - name: user_id
+          in: query
+          type: string
       responses:
         200:
           description: ''
+          schema:
+            $ref: '#/definitions/Conversation'
+definitions:
+  Conversation:
+    type: object
+    properties:
+      topic:
+        type: string
+        description: ''
+      description:
+        type: string
+        description: ''
+      created:
+        type: string
+        format: date-time
+      strict_moderation:
+        type: boolean
+      profanity_filter:
+        type: boolean
+      spam_filter:
+        type: boolean
+      # TODO: context: ???
+      modified:
+        type: string
+        format: date-time
+      conversation_id:
+        type: string
+      is_owner:
+        type: boolean
+      url:
+        type: string
