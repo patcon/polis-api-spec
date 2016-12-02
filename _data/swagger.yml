@@ -101,9 +101,31 @@ paths:
           schema:
             $ref: '#/definitions/ConversationParticipants'
   /votes:
-    post: {}
+    post:
+      security:
+        - basicAuth: []
+      description: Submit vote data.
+      tags:
+        - Votes
+      parameters:
+        - name: body
+          in: body
+          description: Vote object that needs to be added.
+          required: true
+          schema:
+            $ref: '#/definitions/VoteModel'
+      responses:
+        200:
+          description: ''
+          schema:
+            type: object
+            properties:
+              currentPid:
+                type: integer
   /math/pca2:
     get:
+      tags:
+        - Math
       parameters:
         - name: conversation_id
           in: query
@@ -120,9 +142,16 @@ paths:
           schema:
             $ref: '#/definitions/PCA2Response'
   /comments:
-    get: {}
+    get:
+      tags:
+        - Comments
+      responses:
+        default:
+          description: ''
   /ptptStats:
     get:
+      tags:
+        - Stats
       parameters:
         - name: conversation_id
           in: query
@@ -157,6 +186,20 @@ paths:
                 coreness: [-0.11622667139125253, 0.3186507192911382, 0.2658691164608967]
                 extremeness: [-0.18028159265559968, 1.071078390338353, -0.9979297374105403]
 definitions:
+  VoteModel:
+    type: object
+    description: A vote object
+    properties:
+      agid:
+        type: integer
+      conversation_id:
+        type: string
+      pid: {}
+      tid:
+        type: integer
+      vote:
+        type: integer
+        enum: [-1, 0, 1]
   PCA2Response:
     type: object
     description: ''
