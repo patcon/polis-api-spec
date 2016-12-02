@@ -117,6 +117,8 @@ paths:
           schema:
             type: object
             properties:
+              _id:
+                type: string
               zid:
                 description: Conversation ID
                 type: integer
