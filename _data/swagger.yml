@@ -74,6 +74,7 @@ paths:
         - name: conversation_id
           in: query
           type: string
+          required: true
         - name: user_id
           in: query
           type: string
