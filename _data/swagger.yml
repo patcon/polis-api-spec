@@ -104,6 +104,8 @@ paths:
     post: {}
   /math/pca2:
     get: {}
+  /comments:
+    get: {}
   /ptptStats:
     get:
       parameters:
