@@ -150,7 +150,7 @@ definitions:
         type: array
         items:
           description: >-
-          Metric representing how "central" a participant's views are in scope of CONVERSATION. Higher numbers are more centric.
+            Metric representing how "central" a participant's views are in scope of CONVERSATION. Higher numbers are more centric.
           type: number
           format: float
           maximum: 1
@@ -158,7 +158,7 @@ definitions:
         type: array
         items:
           description: >-
-          Metric representing how "central" a participant's views are in scope of GROUP. Higher numbers are more centric.
+            Metric representing how "central" a participant's views are in scope of GROUP. Higher numbers are more centric.
           type: number
           format: float
           maximum: 1
@@ -166,7 +166,7 @@ definitions:
         type: array
         items:
           description: >-
-          Metric representing how extreme a participant's views are in scope of GROUP. (This is to say, these participants are the furthest away from the center of the conversation in the direction of the group in question, and therefore represent the most extreme version of the views of a given group; these are the ideologues.) Max value is undefined, but probably less than 2.
+            Metric representing how extreme a participant's views are in scope of GROUP. (This is to say, these participants are the furthest away from the center of the conversation in the direction of the group in question, and therefore represent the most extreme version of the views of a given group; these are the ideologues.) Max value is undefined, but probably less than 2.
           type: number
           format: float
   Conversation:
