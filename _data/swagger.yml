@@ -132,6 +132,17 @@ definitions:
   PTPTStatsVectors:
     type: object
     description: Data vectors. (Think of them as columns.)
+    example:
+      _id: 583fe36e7d5d2ee98915160e
+      zid: 15169
+      lastVoteTimestamp: 1480582081755
+      ptptstats:
+        pid: [9, 10, 11]
+        gid: [0, 0, 1]
+        n-votes: [21, 27, 27]
+        centricness: [-0.5159909872007928, -1.3150581183585088, 0.3327595737808212]
+        coreness: [-0.11622667139125253, 0.3186507192911382, 0.2658691164608967]
+        extremeness: [-0.18028159265559968, 1.071078390338353, -0.9979297374105403]
     properties:
       pid:
         type: array
