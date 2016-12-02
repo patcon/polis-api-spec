@@ -66,7 +66,7 @@ paths:
                 description: ''
     get:
       security:
-       - basicAuth: []
+        - basicAuth: []
       description: Get all the data for one conversation
       tags:
         - Conversations
@@ -83,10 +83,109 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/Conversation'
+  /participants:
+    get:
+      security:
+        - basicAuth: []
+      description: Get all the data for conversation participants
+      tags:
+        - Participants
+      parameters:
+        - name: conversation_id
+          in: query
+          type: string
+          required: true
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/ConversationParticipants'
+  /votes:
+    post: {}
+  /math/pca2:
+    get: {}
+  /ptptStats:
+    get:
+      parameters:
+        - name: conversation_id
+          in: query
+          type: string
+          required: true
+      responses:
+        200:
+          description: ''
+          schema:
+            type: object
+            properties:
+              zid:
+                description: Conversation ID
+                type: integer
+              lastVoteTimestamp:
+                type: string
+                format: date-time
+                description: Timestamp of last vote in conversation.
+              ptptstats:
+                $ref: '#/definitions/PTPTStatsVectors'
 definitions:
+  PTPTStatsVectors:
+    type: object
+    description: Data vectors. (Think of them as columns.)
+    properties:
+      pid:
+        type: array
+        items:
+          description: Participant ID
+          type: integer
+      gid:
+        type: array
+        items:
+          description: Group ID
+          type: integer
+      n-votes:
+        type: array
+        items:
+          description: Count of votes cast by the participant
+          type: integer
+      centricness:
+        type: array
+        items:
+          description: >-
+          Metric representing how "central" a participant's views are in scope of CONVERSATION. Higher numbers are more centric.
+          type: number
+          format: float
+          maximum: 1
+      coreness:
+        type: array
+        items:
+          description: >-
+          Metric representing how "central" a participant's views are in scope of GROUP. Higher numbers are more centric.
+          type: number
+          format: float
+          maximum: 1
+      extremeness:
+        type: array
+        items:
+          description: >-
+          Metric representing how extreme a participant's views are in scope of GROUP. (This is to say, these participants are the furthest away from the center of the conversation in the direction of the group in question, and therefore represent the most extreme version of the views of a given group; these are the ideologues.) Max value is undefined, but probably less than 2.
+          type: number
+          format: float
   Conversation:
     type: object
     properties:
+      auth_needed_to_vote:
+        type: boolean
+      auth_needed_to_write:
+        type: boolean
+      auth_opt_allow_3rdparty:
+        type: boolean
+      auth_opt_fb:
+        type: boolean
+      auth_opt_fb_computed:
+        type: boolean
+      auth_opt_tw:
+        type: boolean
+      auth_opt_tw_computed:
+        type: boolean
       topic:
         type: string
         description: ''
@@ -102,7 +201,6 @@ definitions:
         type: boolean
       spam_filter:
         type: boolean
-      # TODO: context: ???
       modified:
         type: string
         format: date-time
@@ -112,3 +210,29 @@ definitions:
         type: boolean
       url:
         type: string
+  ConversationParticipants:
+    type: object
+    properties:
+      created:
+        type: string
+        format: date-time
+      last_interaction:
+        type: string
+        format: date-time
+      last_notified:
+        type: string
+        format: date-time
+      mod:
+        type: integer
+      pid:
+        description: Participant ID within this conversation context. Often corresponds to index in vectors.
+        type: integer
+      subscribed:
+        type: integer
+      uid:
+        type: integer
+      vote_count:
+        type: integer
+      zid:
+        description: Conversation ID
+        type: integer
