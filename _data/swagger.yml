@@ -103,7 +103,22 @@ paths:
   /votes:
     post: {}
   /math/pca2:
-    get: {}
+    get:
+      parameters:
+        - name: conversation_id
+          in: query
+          type: string
+          required: true
+        - name: lastVoteTimestamp
+          in: query
+          type: integer
+          format: int64
+          description: Milliseconds since Unix epoch.
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/PCA2Response'
   /comments:
     get: {}
   /ptptStats:
@@ -142,6 +157,59 @@ paths:
                 coreness: [-0.11622667139125253, 0.3186507192911382, 0.2658691164608967]
                 extremeness: [-0.18028159265559968, 1.071078390338353, -0.9979297374105403]
 definitions:
+  PCA2Response:
+    type: object
+    description: ''
+    properties:
+      _id:
+        type: string
+        description: ''
+      base-clusters:
+        type: object
+        description: ''
+      consensus:
+        type: object
+        description: ''
+      group-clusters:
+        type: array
+        items:
+          type: object
+      group-votes:
+        type: object
+        description: ''
+      in-conv:
+        type: array
+        items:
+          type: integer
+      lastModTimestamp:
+        type: integer
+        format: int64
+        description: Milliseconds since Unix epoch.
+      lastVoteTimestamp:
+        type: integer
+        format: int64
+        description: Milliseconds since Unix epoch.
+      n:
+        type: integer
+        description: ''
+      n-cmts:
+        type: integer
+        description: ''
+      pca:
+        type: object
+        description: ''
+      repness:
+        type: object
+        description: ''
+      user-vote-counts:
+        type: array
+        items:
+          type: array
+          items:
+            type: integer
+      votes-base:
+        type: object
+        description: ''
   PTPTStatsVectors:
     type: object
     description: Data vectors. (Think of them as columns.)
