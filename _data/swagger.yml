@@ -65,8 +65,7 @@ paths:
                 type: string
                 description: ''
     get:
-      security:
-        - basicAuth: []
+      security: []
       description: Get all the data for one conversation
       tags:
         - Conversations
