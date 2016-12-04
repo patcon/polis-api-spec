@@ -25,7 +25,7 @@ securityDefinitions:
     type: basic
     description: API key as user name. Password should be left blank.
 paths:
-  /conversations/{conversations_id}/participation:
+  /conversations/{conversation_id}/participation:
     get:
       tags:
         - Conversations
