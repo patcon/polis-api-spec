@@ -128,6 +128,18 @@ paths:
             type: array
             items:
               $ref: '#/definitions/ConversationModel'
+  /metrics:
+    post:
+      description: ''
+      responses:
+        default:
+          description: ''
+  /nextComment:
+    get:
+      description: ''
+      responses:
+        default:
+          description: ''
   /participants:
     get:
       security:
@@ -158,7 +170,7 @@ paths:
           description: Vote object that needs to be added.
           required: true
           schema:
-            $ref: '#/definitions/VoteModel'
+            $ref: '#/definitions/VoteRequestBody'
       responses:
         200:
           description: ''
@@ -167,6 +179,14 @@ paths:
             properties:
               currentPid:
                 type: integer
+  /comments/famous:
+    get:
+      tags:
+        - Comments
+      responses:
+        200:
+          description: ''
+          $ref: '#/definitions/FamousVoterModel'
   /math/pca2:
     get:
       tags:
@@ -190,9 +210,45 @@ paths:
     get:
       tags:
         - Comments
+      parameters:
+        - name: conversation_id
+          in: query
+          type: string
+          required: true
+        - name: include_social
+          default: false
+          in: query
+          type: boolean
+        - name: gid
+          in: query
+          type: integer
       responses:
-        default:
+        200:
           description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CommentModel'
+    post:
+      tags:
+        - Comments
+      parameters:
+        - name: body
+          in: body
+          description: Comment object that needs to be added.
+          required: true
+          schema:
+            $ref: '#/definitions/CommentRequestBody'
+      responses:
+        200:
+          description: ''
+          schema:
+            type: object
+            properties:
+              tid:
+                type: integer
+              CurrentPid:
+                type: integer
   /ptptStats:
     get:
       tags:
@@ -231,7 +287,43 @@ paths:
                 coreness: [-0.11622667139125253, 0.3186507192911382, 0.2658691164608967]
                 extremeness: [-0.18028159265559968, 1.071078390338353, -0.9979297374105403]
 definitions:
-  VoteModel:
+  CommentModel:
+    type: object
+    properties:
+      created:
+        type: integer
+        format: int64
+      is_seed:
+        type: boolean
+      quote_src_url:
+        type: string
+        x-nullable: true
+      social:
+        # TODO: File issue to ask about using consistent FB/TW models
+        type: object
+      tid:
+        type: integer
+      tweet_id:
+        type: integer
+        x-nullable: true
+      txt:
+        type: string
+  CommentRequestBody:
+    type: object
+    properties:
+      agid:
+        type: integer
+      conversation_id:
+        type: string
+      pid:
+        type: string
+        enum: ['mypid']
+      txt:
+        type: string
+      vote:
+        type: integer
+        enum: [-1, 0, 1]
+  VoteRequestBody:
     type: object
     description: A vote object
     properties:
@@ -239,12 +331,81 @@ definitions:
         type: integer
       conversation_id:
         type: string
-      pid: {}
+      pid:
+        type: string
+        enum: ['mypid']
       tid:
         type: integer
       vote:
         type: integer
         enum: [-1, 0, 1]
+  FamousVoterModel:
+    type: object
+    properties:
+      bid:
+        type: integer
+        default: 0
+      facebook:
+        type: object
+        properties:
+          fb_link:
+            type: string
+          fb_name:
+            type: string
+          fb_picture:
+            type: string
+          fb_user_id:
+            type: integer
+          verified:
+            type: boolean
+      fb__location:
+        x-nullable: true
+      isSelf:
+        type: boolean
+      pid:
+        type: integer
+        default: 0
+      priority:
+        type: integer
+        maximum: 1000
+      twitter:
+        type: object
+        properties:
+          follower_count:
+            type: integer
+          location:
+            type: string
+          name:
+            type: string
+          profile_image_url_https:
+            type: string
+          screen_name:
+            type: string
+          twitter_user_id:
+            type: integer
+          verified:
+            type: boolean
+      votes: {}
+  MetricsPayload:
+    type: object
+    description: Payload delivered to the metrics endpoint.
+    properties:
+      clientTimestamp:
+        type: integer
+        format: int64
+      durs:
+        type: array
+        items:
+          type: integer
+      times:
+        type: array
+        items:
+          type: integer
+          format: int64
+      types:
+        type: array
+        items:
+          type: integer
   PCA2Response:
     type: object
     description: ''
