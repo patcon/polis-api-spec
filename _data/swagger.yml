@@ -253,6 +253,7 @@ paths:
             type: object
             properties:
               tid:
+                description: Topic ID?
                 type: integer
               CurrentPid:
                 type: integer
@@ -309,6 +310,7 @@ definitions:
         # TODO: File issue to ask about using consistent FB/TW models
         type: object
       tid:
+        description: Topic ID?
         type: integer
       tweet_id:
         type: integer
@@ -342,6 +344,7 @@ definitions:
         type: string
         enum: ['mypid']
       tid:
+        description: Topic ID?
         type: integer
       vote:
         type: integer
