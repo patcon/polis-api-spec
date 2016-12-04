@@ -186,7 +186,8 @@ paths:
       responses:
         200:
           description: ''
-          $ref: '#/definitions/FamousVoterModel'
+          schema:
+            $ref: '#/definitions/FamousVoterModel'
   /math/pca2:
     get:
       tags:
