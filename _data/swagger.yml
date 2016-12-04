@@ -191,7 +191,9 @@ paths:
         200:
           description: ''
           schema:
-            $ref: '#/definitions/FamousVoterModel'
+            type: object
+            additionalProperties:
+              $ref: '#/definitions/FamousVoterModel'
   /math/pca2:
     get:
       tags:
