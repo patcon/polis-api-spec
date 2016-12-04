@@ -25,6 +25,29 @@ securityDefinitions:
     type: basic
     description: API key as user name. Password should be left blank.
 paths:
+  /conversations/{conversation_id}:
+    get:
+      security: []
+      summary: Get all the data for one conversation
+      description: >-
+        If you don't supply a `user_id`, the URLs returned will not allow you
+        to map the participants who follow the URLs back to users of your
+        system.
+      tags:
+        - Conversations
+      parameters:
+        - name: conversation_id
+          in: path
+          type: string
+          required: true
+        - name: user_id
+          in: query
+          type: string
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/ConversationModel'
   /conversations:
     post:
       security:
@@ -65,23 +88,27 @@ paths:
                 type: string
                 description: ''
     get:
-      security: []
-      description: Get all the data for one conversation
+      security:
+       - basicAuth: []
+      summary: Get listing of all conversations
       tags:
         - Conversations
       parameters:
-        - name: conversation_id
-          in: query
-          type: string
-          required: true
         - name: user_id
           in: query
-          type: string
+          type: integer
+          description: Numeric ID of conversation owner/participant.
+        - name: limit
+          in: query
+          type: integer
+          description: Unlimited result set if not specified.
       responses:
         200:
           description: ''
           schema:
-            $ref: '#/definitions/ConversationModel'
+            type: array
+            items:
+              $ref: '#/definitions/ConversationModel'
   /participants:
     get:
       security:
