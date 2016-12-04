@@ -130,12 +130,16 @@ paths:
               $ref: '#/definitions/ConversationModel'
   /metrics:
     post:
+      tags:
+        - Metrics
       description: ''
       responses:
         default:
           description: ''
   /nextComment:
     get:
+      tags:
+        - Comments
       description: ''
       responses:
         default:
