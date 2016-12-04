@@ -25,6 +25,25 @@ securityDefinitions:
     type: basic
     description: API key as user name. Password should be left blank.
 paths:
+  /conversations/{conversations_id}/participation:
+    get:
+      tags:
+        - Conversations
+      security:
+       - basicAuth: []
+      summary: Get participation data for one conversation
+      parameters:
+        - name: conversation_id
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: 'Map of individual participant stats keyed to user_id'
+          schema:
+            type: object
+            additionalProperties:
+              $ref: '#/definitions/ConversationParticipantStats'
   /conversations/{conversation_id}:
     get:
       security: []
@@ -426,6 +445,15 @@ definitions:
         type: string
       conversation_id:
         type: string
+  ConversationParticipantStats:
+    type: object
+    properties:
+      votes:
+        description: Vote count for individual participant
+        type: integer
+      comments:
+        description: Comment count for individual participant
+        type: integer
   ConversationParticipants:
     type: object
     properties:
