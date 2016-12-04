@@ -81,7 +81,7 @@ paths:
         200:
           description: ''
           schema:
-            $ref: '#/definitions/Conversation'
+            $ref: '#/definitions/ConversationModel'
   /participants:
     get:
       security:
@@ -294,29 +294,30 @@ definitions:
             Metric representing how extreme a participant's views are in scope of GROUP. (This is to say, these participants are the furthest away from the center of the conversation in the direction of the group in question, and therefore represent the most extreme version of the views of a given group; these are the ideologues.) Max value is undefined, but probably less than 2.
           type: number
           format: float
-  Conversation:
+  ConversationModel:
     type: object
     properties:
-      auth_needed_to_vote:
-        type: boolean
-      auth_needed_to_write:
-        type: boolean
-      auth_opt_allow_3rdparty:
-        type: boolean
-      auth_opt_fb:
-        type: boolean
-      auth_opt_fb_computed:
-        type: boolean
-      auth_opt_tw:
-        type: boolean
-      auth_opt_tw_computed:
-        type: boolean
       topic:
         type: string
-        description: ''
+        description: 'Conversation title.'
       description:
         type: string
-        description: ''
+        description: >-
+          Conversation description shown above interactive portion. May contain
+          markdown formatting.
+      is_anon:
+        type: boolean
+      is_active:
+        type: boolean
+      is_public:
+        type: boolean
+      email_domain:
+        type: string
+        x-nullable: true
+      owner:
+        type: integer
+      participant_count:
+        type: integer
       created:
         type: integer
         format: int64
@@ -327,15 +328,72 @@ definitions:
         type: boolean
       spam_filter:
         type: boolean
+      context:
+        x-nullable: true
       modified:
         type: integer
         format: int64
         description: Milliseconds since Unix epoch.
-      conversation_id:
+      owner_sees_participation_stats:
+        type: boolean
+      course_id:
+        x-nullable: true
+      lti_users_only:
+        type: boolean
+      link_url:
         type: string
+        x-nullable: true
+      upvotes:
+        type: integer
+      parent_url:
+        type: string
+        x-nullable: true
+      vis_type:
+        type: integer
+      write_type:
+        type: integer
+      bgcolor:
+        type: string
+        x-nullable: true
+      help_type:
+        type: integer
+      socialbtn_type:
+        type: integer
+      style_btn:
+        x-nullable: true
+      auth_needed_to_vote:
+        type: boolean
+      auth_needed_to_write:
+        type: boolean
+      auth_opt_fb:
+        type: boolean
+      auth_opt_tw:
+        type: boolean
+      auth_opt_allow_3rdparty:
+        type: boolean
+      help_bgcolor:
+        x-nullable: true
+      help_color:
+        x-nullable: true
+      is_data_open:
+        type: boolean
+      is_slack:
+        type: boolean
+      site_id:
+        type: string
+      auth_opt_fb_computed:
+        type: boolean
+      auth_opt_tw_computed:
+        type: boolean
+      ownername:
+        type: string
+      is_mod:
+        type: boolean
       is_owner:
         type: boolean
-      url:
+      pp:
+        type: boolean
+      conversation_id:
         type: string
   ConversationParticipants:
     type: object
