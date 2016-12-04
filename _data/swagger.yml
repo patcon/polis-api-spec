@@ -25,16 +25,16 @@ securityDefinitions:
     type: basic
     description: API key as user name. Password should be left blank.
 paths:
-  /conversations/{conversation_id}/participation:
+  /participation:
     get:
       tags:
-        - Conversations
+        - Stats
       security:
        - basicAuth: []
       summary: Get participation data for one conversation
       parameters:
         - name: conversation_id
-          in: path
+          in: query
           type: string
           required: true
       responses:
