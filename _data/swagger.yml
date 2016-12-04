@@ -39,7 +39,7 @@ paths:
           required: true
       responses:
         200:
-          description: 'Map of individual participant stats keyed to user_id'
+          description: Map of individual participant stats keyed to user index in conversation scope
           schema:
             type: object
             additionalProperties:
