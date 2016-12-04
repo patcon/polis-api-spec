@@ -420,6 +420,10 @@ definitions:
         type: boolean
       pp:
         type: boolean
+      url:
+        type: string
+      mod_url:
+        type: string
       conversation_id:
         type: string
   ConversationParticipants:
