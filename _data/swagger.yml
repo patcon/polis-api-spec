@@ -24,7 +24,7 @@ securityDefinitions:
   basicAuth:
     type: basic
     description: >-
-      API key as user name. Password can be anything (and something must be
+      API key as user name. Password can be anything (but something must be
       entered for browser UI to validate).
 paths:
   /participation:
