@@ -28,16 +28,16 @@ securityDefinitions:
     description: >-
       API key must be requested from Pol.is team.
 paths:
-  /participation:
+  /conversations/{conversation_id}/participation:
     get:
       tags:
-        - Stats
+        - Conversations
       security:
         - api_key: []
       summary: Get participation data for one conversation
       parameters:
         - name: conversation_id
-          in: query
+          in: path
           type: string
           required: true
       responses:
@@ -148,16 +148,16 @@ paths:
       responses:
         default:
           description: ''
-  /participants:
+  /conversations/{conversation_id}/participants:
     get:
       security:
         - api_key: []
       description: Get all the data for conversation participants
       tags:
-        - Participants
+        - Conversations
       parameters:
         - name: conversation_id
-          in: query
+          in: path
           type: string
           required: true
       responses:
@@ -198,13 +198,13 @@ paths:
             type: object
             additionalProperties:
               $ref: '#/definitions/FamousVoterModel'
-  /math/pca2:
+  /conversations/{conversation_id}/math/pca2:
     get:
       tags:
-        - Math
+        - Conversations
       parameters:
         - name: conversation_id
-          in: query
+          in: path
           type: string
           required: true
         - name: lastVoteTimestamp
@@ -217,13 +217,15 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/PCA2Response'
-  /comments:
+  /conversations/{conversation_id}/comments:
     get:
       tags:
-        - Comments
+        - Conversations
+      security:
+        - api_key: []
       parameters:
         - name: conversation_id
-          in: query
+          in: path
           type: string
           required: true
         - name: include_social
@@ -233,6 +235,10 @@ paths:
         - name: gid
           in: query
           type: integer
+        - name: moderation
+          in: query
+          type: boolean
+          description: ''
       responses:
         200:
           description: ''
@@ -243,6 +249,8 @@ paths:
     post:
       tags:
         - Comments
+      security:
+        - api_key: []
       parameters:
         - name: body
           in: body
@@ -261,13 +269,15 @@ paths:
                 type: integer
               CurrentPid:
                 type: integer
-  /ptptStats:
+  /conversations/{conversation_id}/conversationStats:
     get:
       tags:
-        - Stats
+        - Conversations
+      security:
+        - api_key: []
       parameters:
         - name: conversation_id
-          in: query
+          in: path
           type: string
           required: true
       responses:
