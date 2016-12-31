@@ -21,18 +21,19 @@ consumes:
 produces:
   - application/json
 securityDefinitions:
-  basicAuth:
-    type: basic
+  api_key:
+    type: apiKey
+    in: header
+    name: Authorization
     description: >-
-      API key as user name. Password can be anything (but something must be
-      entered for browser UI to validate).
+      API key must be requested from Pol.is team.
 paths:
   /participation:
     get:
       tags:
         - Stats
       security:
-       - basicAuth: []
+        - api_key: []
       summary: Get participation data for one conversation
       parameters:
         - name: conversation_id
@@ -48,7 +49,8 @@ paths:
               $ref: '#/definitions/ConversationParticipantStats'
   /conversations/{conversation_id}:
     get:
-      security: []
+      security:
+        - api_key: []
       summary: Get all the data for one conversation
       description: >-
         If you don't supply a `user_id`, the URLs returned will not allow you
@@ -72,7 +74,7 @@ paths:
   /conversations:
     post:
       security:
-       - basicAuth: []
+        - api_key: []
       description: Create a new conversation
       tags:
         - Conversations
@@ -110,7 +112,7 @@ paths:
                 description: ''
     get:
       security:
-       - basicAuth: []
+        - api_key: []
       summary: Get listing of all conversations
       tags:
         - Conversations
@@ -149,7 +151,7 @@ paths:
   /participants:
     get:
       security:
-        - basicAuth: []
+        - api_key: []
       description: Get all the data for conversation participants
       tags:
         - Participants
@@ -166,7 +168,7 @@ paths:
   /votes:
     post:
       security:
-        - basicAuth: []
+        - api_key: []
       description: Submit vote data.
       tags:
         - Votes
