@@ -30,6 +30,7 @@ securityDefinitions:
 paths:
   /conversations:
     post:
+      operationId: createConversation
       security:
         - api_key: []
       description: Create a new conversation
@@ -68,6 +69,7 @@ paths:
                 type: string
                 description: ''
     get:
+      operationId: getAllConversations
       security:
         - api_key: []
       summary: Get listing of all conversations
@@ -91,6 +93,7 @@ paths:
               $ref: '#/definitions/ConversationModel'
   /conversations/{conversation_id}:
     get:
+      operationId: getConversation
       security:
         - api_key: []
       summary: Get all the data for one conversation
