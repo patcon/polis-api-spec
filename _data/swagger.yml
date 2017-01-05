@@ -253,7 +253,7 @@ paths:
               $ref: '#/definitions/CommentModel'
     post:
       tags:
-        - Comments
+        - Conversations
       consumes:
         - application/json
       security:
