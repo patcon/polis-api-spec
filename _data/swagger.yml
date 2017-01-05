@@ -354,6 +354,8 @@ definitions:
         enum: ['mypid']
       txt:
         type: string
+      is_seed:
+        type: boolean
       vote:
         type: integer
         enum: [-1, 0, 1]
