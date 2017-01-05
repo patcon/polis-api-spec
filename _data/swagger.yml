@@ -226,6 +226,7 @@ paths:
     get:
       tags:
         - Conversations
+      operationId: getComment
       security:
         - api_key: []
       parameters:
@@ -254,6 +255,7 @@ paths:
     post:
       tags:
         - Conversations
+      operationId: createComment
       consumes:
         - application/json
       security:
