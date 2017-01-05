@@ -259,7 +259,11 @@ paths:
       security:
         - api_key: []
       parameters:
-        - name: body
+        - name: conversation_id
+          in: path
+          type: string
+          required: true
+        - name: comment
           in: body
           description: Comment object that needs to be added.
           required: true
