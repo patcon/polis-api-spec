@@ -12,7 +12,7 @@ info:
   license:
     name: 'AGPL-3.0'
     url: 'https://opensource.org/licenses/AGPL-3.0'
-host: polis-api-proxy.herokuapp.com
+host: polis-api-proxy.onrender.com
 basePath: /api/v3
 schemes:
   - https
